@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URC Colegio</title>
+    <!-- Agrega aquí tus estilos CSS -->
+    <style>
+        /* Estilos CSS aquí */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #slider {
+            position: relative;
+            width: 100%;
+            height: 200px; /* Ajusta la altura según tus necesidades */
+            overflow: hidden;
+        }
+
+        #slider img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        #slider img.active {
+            opacity: 1;
+        }
+
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 20px;
+        }
+
+        nav a:hover {
+            background-color: #666;
+        }
+
+        #codigoForm {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #codigoForm input[type="text"] {
+            padding: 5px;
+            margin-right: 5px;
+        }
+
+        #codigoForm input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #444;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>URC Colegio</h1>
+    </header>
+    <div id="slider">
+        <img class="active" src="foto1.jpg" alt="Foto 1">
+        <img src="foto2.jpg" alt="Foto 2">
+        <img src="foto3.jpg" alt="Foto 3">
+        <img src="foto4.jpg" alt="Foto 4">
+        <img src="foto5.jpg" alt="Foto 5">
+    </div>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#noticias">Noticias</a>
+        <a href="#boletines" onclick="mostrarFormulario()">Boletines</a>
+        <a href="#informacion">Información</a>
+    </nav>
+
+    <!-- Formulario para ingresar código de estudiante -->
+    <div id="codigoForm" style="display: none;">
+        <form id="formCodigo" onsubmit="abrirPDF(); return false;">
+            <label for="codigo">Código estudiante:</label>
+            <input type="text" id="codigo" name="codigo" required>
+            <input type="submit" value="Aceptar">
+        </form>
+    </div>
+
+    <!-- Agrega aquí tu código JavaScript para el carrusel y abrir PDF -->
+    <script>
+        var slides = document.querySelectorAll('#slider img');
+        var currentSlide = 0;
+        var slideInterval = setInterval(nextSlide, 2000);
+
+        function nextSlide() {
+            slides[currentSlide].className = '';
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].className = 'active';
+            if (currentSlide === 0) {
+                slides[slides.length - 1].className = '';
+            }
+        }
+
+        function mostrarFormulario() {
+            document.getElementById("codigoForm").style.display = "block";
+        }
+
+        function abrirPDF() {
+            var codigo = document.getElementById("codigo").value;
+            // Abre el documento PDF en la misma ruta
+            window.open(codigo + ".pdf", "_blank");
+        }
+    </script>
+</body>
+</html>
