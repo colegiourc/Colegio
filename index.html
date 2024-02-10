@@ -107,10 +107,10 @@
         <p>Ingresa tu código de estudiante para ver tus boletines.</p>
         <!-- Formulario para ingresar código de estudiante -->
         <div id="codigoForm">
-            <form id="formCodigo" onsubmit="abrirPDF(); return false;">
+            <form id="formCodigo">
                 <label for="codigo">Código estudiante:</label>
                 <input type="text" id="codigo" name="codigo" required>
-                <input type="submit" value="Aceptar">
+                <input type="button" value="Aceptar" onclick="abrirPDF()">
             </form>
         </div>
     </div>
@@ -146,11 +146,15 @@
             }
         }
 
-        // Función para abrir PDF (reutilizada de tu código anterior)
+        // Función para abrir PDF
         function abrirPDF() {
             var codigo = document.getElementById("codigo").value;
-            // Abre el documento PDF en la misma ruta
-            window.open(codigo + ".pdf", "_blank");
+            if (codigo.trim() !== "") {
+                // Abre el documento PDF en la misma ruta
+                window.open(codigo + ".pdf", "_blank");
+            } else {
+                alert("Por favor, ingresa un código válido.");
+            }
         }
     </script>
 </body>
