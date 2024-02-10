@@ -23,7 +23,7 @@
         #slider {
             position: relative;
             width: 100%;
-            height: 300px; /* Ajusta la altura según tus necesidades */
+            height: 400px; /* Ajusta la altura según tus necesidades */
             overflow: hidden;
         }
 
@@ -106,7 +106,7 @@
         <h2>Contenido de Boletines</h2>
         <p>Ingresa tu código de estudiante para ver tus boletines.</p>
         <!-- Formulario para ingresar código de estudiante -->
-        <div id="codigoForm">
+        <div id="codigoForm" style="display: none;">
             <form id="formCodigo">
                 <label for="codigo">Código estudiante:</label>
                 <input type="text" id="codigo" name="codigo" required>
@@ -140,8 +140,10 @@
             // Muestra el contenido de la sección seleccionada
             document.getElementById(seccion + "Content").style.display = "block";
 
-            // Oculta el formulario de boletines si se muestra otra sección
-            if (seccion !== "boletines") {
+            // Muestra el formulario de boletines solo si se selecciona esa sección
+            if (seccion === "boletines") {
+                document.getElementById("codigoForm").style.display = "block";
+            } else {
                 document.getElementById("codigoForm").style.display = "none";
             }
         }
