@@ -23,7 +23,7 @@
         #slider {
             position: relative;
             width: 100%;
-            height: 200px; /* Ajusta la altura según tus necesidades */
+            height: 400px; /* Ajusta la altura según tus necesidades */
             overflow: hidden;
         }
 
@@ -55,22 +55,16 @@
             background-color: #666;
         }
 
-        #codigoForm {
-            text-align: center;
-            margin-top: 20px;
+        #inicioContent,
+        #noticiasContent,
+        #informacionContent,
+        #boletinesContent {
+            display: none;
+            padding: 20px;
         }
 
-        #codigoForm input[type="text"] {
-            padding: 5px;
-            margin-right: 5px;
-        }
-
-        #codigoForm input[type="submit"] {
-            padding: 5px 10px;
-            background-color: #444;
-            color: white;
-            border: none;
-            cursor: pointer;
+        #boletinesContent {
+            display: block; /* Mostrar contenido de boletines por defecto */
         }
     </style>
 </head>
@@ -86,40 +80,59 @@
         <img src="foto5.jpg" alt="Foto 5">
     </div>
     <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#noticias">Noticias</a>
-        <a href="#boletines" onclick="mostrarFormulario()">Boletines</a>
-        <a href="#informacion">Información</a>
+        <a href="#" onclick="mostrarContenido('inicio')">Inicio</a>
+        <a href="#" onclick="mostrarContenido('noticias')">Noticias</a>
+        <a href="#" onclick="mostrarContenido('informacion')">Información</a>
+        <a href="#" onclick="mostrarContenido('boletines')">Boletines</a>
     </nav>
 
-    <!-- Formulario para ingresar código de estudiante -->
-    <div id="codigoForm" style="display: none;">
-        <form id="formCodigo" onsubmit="abrirPDF(); return false;">
-            <label for="codigo">Código estudiante:</label>
-            <input type="text" id="codigo" name="codigo" required>
-            <input type="submit" value="Aceptar">
-        </form>
+    <!-- Contenido para cada sección -->
+    <div id="inicioContent">
+        <!-- Contenido para la sección de Inicio -->
+        <h2>Contenido de Inicio</h2>
+        <p>Bienvenido a la página de inicio de URC Colegio.</p>
     </div>
 
-    <!-- Agrega aquí tu código JavaScript para el carrusel y abrir PDF -->
+    <div id="noticiasContent">
+        <!-- Contenido para la sección de Noticias -->
+        <h2>Contenido de Noticias</h2>
+        <p>Aquí encontrarás las últimas noticias de URC Colegio.</p>
+    </div>
+
+    <div id="informacionContent">
+        <!-- Contenido para la sección de Información -->
+        <h2>Contenido de Información</h2>
+        <p>Información importante sobre URC Colegio.</p>
+    </div>
+
+    <div id="boletinesContent">
+        <!-- Contenido para la sección de Boletines -->
+        <h2>Contenido de Boletines</h2>
+        <p>Ingresa tu código de estudiante para ver tus boletines.</p>
+        <!-- Formulario para ingresar código de estudiante -->
+        <div id="codigoForm">
+            <form id="formCodigo" onsubmit="abrirPDF(); return false;">
+                <label for="codigo">Código estudiante:</label>
+                <input type="text" id="codigo" name="codigo" required>
+                <input type="submit" value="Aceptar">
+            </form>
+        </div>
+    </div>
+
+    <!-- Agrega aquí tu código JavaScript para mostrar contenido -->
     <script>
-        var slides = document.querySelectorAll('#slider img');
-        var currentSlide = 0;
-        var slideInterval = setInterval(nextSlide, 2000);
+        function mostrarContenido(seccion) {
+            // Oculta todos los contenidos
+            document.getElementById("inicioContent").style.display = "none";
+            document.getElementById("noticiasContent").style.display = "none";
+            document.getElementById("informacionContent").style.display = "none";
+            document.getElementById("boletinesContent").style.display = "none";
 
-        function nextSlide() {
-            slides[currentSlide].className = '';
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].className = 'active';
-            if (currentSlide === 0) {
-                slides[slides.length - 1].className = '';
-            }
+            // Muestra el contenido de la sección seleccionada
+            document.getElementById(seccion + "Content").style.display = "block";
         }
 
-        function mostrarFormulario() {
-            document.getElementById("codigoForm").style.display = "block";
-        }
-
+        // Función para abrir PDF (reutilizada de tu código anterior)
         function abrirPDF() {
             var codigo = document.getElementById("codigo").value;
             // Abre el documento PDF en la misma ruta
