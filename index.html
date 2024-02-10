@@ -115,8 +115,21 @@
         </div>
     </div>
 
-    <!-- Agrega aquí tu código JavaScript para mostrar contenido -->
+    <!-- Agrega aquí tu código JavaScript para mostrar contenido y el carrusel -->
     <script>
+        var slides = document.querySelectorAll('#slider img');
+        var currentSlide = 0;
+        var slideInterval = setInterval(nextSlide, 2000);
+
+        function nextSlide() {
+            slides[currentSlide].className = '';
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].className = 'active';
+            if (currentSlide === 0) {
+                slides[slides.length - 1].className = '';
+            }
+        }
+
         function mostrarContenido(seccion) {
             // Oculta todos los contenidos
             document.getElementById("inicioContent").style.display = "none";
