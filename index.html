@@ -62,10 +62,6 @@
             display: none;
             padding: 20px;
         }
-
-        #boletinesContent {
-            display: block; /* Mostrar contenido de boletines por defecto */
-        }
     </style>
 </head>
 <body>
@@ -130,6 +126,11 @@
 
             // Muestra el contenido de la sección seleccionada
             document.getElementById(seccion + "Content").style.display = "block";
+
+            // Oculta el formulario de boletines si se muestra otra sección
+            if (seccion !== "boletines") {
+                document.getElementById("codigoForm").style.display = "none";
+            }
         }
 
         // Función para abrir PDF (reutilizada de tu código anterior)
